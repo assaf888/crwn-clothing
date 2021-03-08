@@ -11,34 +11,35 @@ import { auth, createUserProfileDocument } from './firebase/firebase';
 
 function App() {
 
-  const [currentUser,setcurrentUser] = useState(null);
+  const [currentUser, setcurrentUser] = useState(null);
   const [renderController] = useState(null);
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth) {
+      if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
           setcurrentUser({
-            id:snapShot.id,
-            ...snapShot.data()}
-            );
+            id: snapShot.id,
+            ...snapShot.data()
+          }
+          );
         })
       }
-      setcurrentUser(userAuth);   
+      setcurrentUser(userAuth);
       return () => unsubscribeFromAuth();
     })
-  },[renderController])
+  }, [renderController])
 
   return (
     <div>
-    <Header currentUser={currentUser} />
-    <Switch>
-      <Route exact path='/' component={HomePage} />
-      <Route path='/shop' component={ShopPage} />
-      <Route path='/signin' component={SignInAndSignUpPage} />
-    </Switch>
+      <Header currentUser={currentUser} />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route path='/signin' component={SignInAndSignUpPage} />
+      </Switch>
     </div>
   );
 }
