@@ -2,9 +2,8 @@ import './App.css';
 import React, { useState, useEffect } from 'react'
 import HomePage from './pages/homepage/homepage';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ShopPage from './pages/shop/shop';
 import Header from './components/header/header';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up';
